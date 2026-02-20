@@ -1,0 +1,12 @@
+[project]
+name = "gradio6-playground"
+version = "0.1.0"
+description = "Gradio 6 + Google ADK の10タブ実験アプリ"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "gradio",
+    "google-adk",
+    "python-dotenv",
+    "matplotlib>=3.10.8",
+]
