@@ -5,7 +5,7 @@ description = "Gradio 6 + Google ADK の10タブ実験アプリ"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "gradio",
+    "gradio>=6.9",
     "google-adk",
     "python-dotenv",
     "matplotlib>=3.10.8",

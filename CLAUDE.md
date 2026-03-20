@@ -1,47 +1,37 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Gradio 6 + Google ADK による10タブ構成の実験的 Web アプリ。起動: `uv run python main.py`
 
-## プロジェクト概要
+## 守るべき振る舞い
 
-Gradio 6 + Google ADK による10タブ構成の実験的 Web アプリ。詳細は `PRD.md` を参照。
-ユーザー要望は `FEATURES.md`、AI 向け要件定義は `PRD.md` に記載。
+### ファイルの削除
+- sandbox で動作しているとき、不要ファイルの削除はユーザーへ問い合わせず、プロジェクトルートに `tmp/` フォルダを設けてそこに移動する。
+- 移動した記録は `tmp/mv-files.log` に追記し、ユーザーへの問い合わせを減らしてエージェントが止まらず開発できるようにする。
 
-## 技術スタック
+### コーディングタスクの進行
+- タスクは plan モードで計画を立ててから実装する。
+- コーディング作業（ソースコード変更）を含むタスクは、実装着手前に GitHub issue を作成する。
+- 作業の流れ: plan モードで計画 → issue 作成 → 実装着手 → コミット（issue 番号を紐づけ）
+- `.md` などドキュメントのみの更新では issue 作成を提案しない。
+- ユーザーから明示的な指示がなければ issue は作成しない。
 
-- Python 3.11（`.python-version` で固定）
-- パッケージ管理: astral uv
-- UI: Gradio 6
-- AI: Google ADK (Gemini)
-- デプロイ: GCP Cloud Run（GitHub からの自動デプロイ）
+### GitHub issue
+- 着手した場合はステータスを進行中にする。
+- 作業完了時は作業内容を記録し、コミットする。
 
-## リポジトリ
+### 応答フロー
+- ユーザーへの質問が複数あるときは Q1, Q2, Q3... の形式で提示する。ユーザーは A1, A2, A3... で回答する。
+- 質問が1つだけの場合は番号不要。
 
-- GitHub: <https://github.com/catnipglitch/gradio6-playground>
-- SSH: `git@github.com:catnipglitch/gradio6-playground.git`
+## マークダウン書式
+- 形式: GitHub Flavored Markdown (GFM)
+- 言語: 日本語（テクニカルライティング視点で正確性と可読性を重視）
+- 文字コード/改行: UTF-8 / LF
+- 個人情報・機密情報（API キー等）は記載しない。
+- 手順や解説は手動で階層番号（例: 1 / 1.1 / 1.2）を付与して構造化する。
+- Markdown の自動番号付きリスト（1. ）は使用禁止。
+- セクションの見出しには番号を含めない。
 
-## コマンド
-
-```bash
-# 依存パッケージインストール
-uv sync
-
-# アプリ起動
-uv run python main.py
-
-# パッケージ追加
-uv add <package-name>
-```
-
-## アーキテクチャ
-
-- エントリーポイント: `main.py`（Gradio Blocks 定義）
-- 各タブの実装: `tabs/` ディレクトリに `tab01_chat.py`, `tab10_apikey.py` 等のファイルで分離
-- APIキー: 環境変数 `GEMINI_API_KEY`（`.env` またはSecret Manager）、Tab 10 のユーザー入力（セッション限定）の2系統。ユーザー入力を優先。
-
-## 開発ルール
-
-- 開発は GitHub Issue ベース。Issue → ブランチ → PR で進行。
-- Gradio 起動時は `server_name="0.0.0.0"`, `server_port=int(os.environ.get("PORT", 7860))` を指定。
-- APIキーをログ出力・永続化しない。
-- 日本語でコミュニケーションする。
+## 関連ドキュメント
+- PRD.md - プロダクト要件定義（技術スタック・アーキテクチャ・開発ルール含む）
+- README.md - プロジェクト概要
