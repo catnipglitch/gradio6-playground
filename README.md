@@ -88,4 +88,4 @@ gradio6-playground/
 
 ## ライセンス
 
-MIT
+Apache License 2.0 — 詳細は [LICENSE](LICENSE) を参照してください。
