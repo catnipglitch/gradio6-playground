@@ -1,0 +1,12 @@
+.venv/
+.git/
+.github/
+.claude/
+.idea/
+.vscode/
+tmp/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example

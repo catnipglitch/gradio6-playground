@@ -8,8 +8,8 @@ RUN pip install --no-cache-dir uv
 
 WORKDIR /app
 
-COPY pyproject.toml README.md /app/
-RUN uv sync --no-dev
+COPY pyproject.toml uv.lock README.md /app/
+RUN uv sync --no-dev --frozen
 
 COPY . /app
 
